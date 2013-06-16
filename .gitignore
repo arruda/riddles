@@ -9,3 +9,5 @@
 
 #css
 stp/static/css/*
+## compass
+stp/compass/.sass-cache/*
