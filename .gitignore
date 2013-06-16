@@ -6,3 +6,6 @@
 *.pyc
 *.db
 *.sqlite*
+
+#css
+stp/static/css/*
