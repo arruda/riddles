@@ -1,0 +1,8 @@
+#sublime
+*.sublime*
+.ropeproject
+
+#Django
+*.pyc
+*.db
+*.sqlite*
