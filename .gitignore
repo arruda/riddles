@@ -8,6 +8,6 @@
 *.sqlite*
 
 #css
-stp/static/css/*
+riddles/static/css/*
 ## compass
-stp/compass/.sass-cache/*
+riddles/compass/.sass-cache/*

@@ -5,9 +5,9 @@ SERVE_MEDIA = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stpdb' ,
-        'USER': 'stp_u',
-        'PASSWORD': 'stp_u',
+        'NAME': 'riddlesdb' ,
+        'USER': 'riddles_u',
+        'PASSWORD': 'riddles_u',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
