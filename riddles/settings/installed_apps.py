@@ -6,18 +6,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin', 
+    'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'django_extensions', 
-    'model_utils', 
+    'django_extensions',
+    'model_utils',
     'debug_toolbar',
 
 #apps
 
 #libs
-    'html5_boilerplate',
-    
+    'riddles.html5_boilerplate',
+
 #deploy
 
 )
