@@ -1,5 +1,4 @@
 #!/bin/bash
-COMANDO=$1
 
 i18n(){
     echo "atualizando .mo"
@@ -16,4 +15,6 @@ i18n_criar(){
     cd -
 }
 
+
+COMANDO=$1
 $COMANDO
