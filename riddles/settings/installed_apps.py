@@ -12,11 +12,13 @@ INSTALLED_APPS = (
     'django_extensions',
     'model_utils',
     'debug_toolbar',
+    'south',
 
 #apps
 
 #libs
     'riddles.html5_boilerplate',
+    'riddles.riddles',
 
 #deploy
 
