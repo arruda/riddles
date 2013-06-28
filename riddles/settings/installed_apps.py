@@ -14,13 +14,8 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'south',
 
-#apps
-
-#libs
     'riddles.html5_boilerplate',
     'riddles.riddles',
-
-#deploy
 
 )
 
