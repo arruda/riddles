@@ -11,3 +11,6 @@
 riddles/static/css/*
 ## compass
 riddles/compass/.sass-cache/*
+
+#vagrant
+.vagrant
