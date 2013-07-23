@@ -33,7 +33,9 @@ class Guess(models.Model):
     If the guess's answer is equal to the Riddle answer than it's correct.
     """
     answer = models.CharField(_("Guess"), max_length=250)
-    riddle = models.ForeignKey(Riddle)
+    # should make riddle FK null at first so that we can run the
+    # schemamigration then in datamigration we make it not null!
+    riddle = models.ForeignKey(Riddle, null=True)
 
     def __unicode__(self):
         return "%s - %s" % (self.riddle.content, self.answer)
