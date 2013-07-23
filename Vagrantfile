@@ -89,8 +89,12 @@ Vagrant.configure("2") do |config|
     # chef.data_bags_path = "../my-recipes/data_bags"
     chef.add_recipe "apt"
     chef.add_recipe "openssl"
+    chef.add_recipe "ohai"
     chef.add_recipe "build-essential"
     chef.add_recipe "postgresql::server"
+    chef.add_recipe "nginx"
+    chef.add_recipe "python"
+    chef.add_recipe "guinicorn"
     # chef.add_role "web"
 
     chef.json = {
@@ -112,6 +116,9 @@ Vagrant.configure("2") do |config|
             :method =>  'md5'
           },
         ],
+        # :guinicorn => {
+        #   :virtualenv => '/home/vagrant/.virtualenvs/'
+        # }
       }
     }
     # # You may also specify custom JSON attributes:
