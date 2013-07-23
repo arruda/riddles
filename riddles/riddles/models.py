@@ -15,9 +15,10 @@ from django.utils.translation import ugettext_lazy as _
 class Riddle(models.Model):
     """
     Riddle model
-	"""
-    content = models.CharField(_("Content"),max_length=250)
-    answer = models.CharField(_("Answer"),max_length=250)
+    """
+
+    content = models.CharField(_("Content"), max_length=250)
+    answer = models.CharField(_("Answer"), max_length=250)
 
     class Meta:
         app_label = 'riddles'
@@ -31,6 +32,4 @@ class Guess(models.Model):
     A Guess in a riddle.
     If the guess's answer is equal to the Riddle answer than it's correct.
     """
-    answer = models.CharField(_("Guess"),max_length=250)
-
-
+    answer = models.CharField(_("Guess"), max_length=250)
