@@ -1,1 +1,2 @@
 riddles/settings
+riddles/test_utils
