@@ -23,6 +23,7 @@ ON_PRODUCTION = os.environ.has_key('ON_PRODUCTION')
 from config import *
 from installed_apps import *
 from logging import *
+from test_settings import *
 
 NO_DEPRECATION_WARNINGS=False
 if not ON_PRODUCTION:
