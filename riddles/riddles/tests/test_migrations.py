@@ -14,11 +14,10 @@ class TestMigration0003(MigrationTestCase):
     dest_migration = '0002_auto__add_guess'
     django_application = 'riddles'
 
-    def test_schema_and_data_updated(self):
-        # import pdb; pdb.set_trace()
+    def test_schema(self):
         try:
             GuessStart = self.start_orm['riddles.Guess']
-            self.fail("Shouln't have this model")
+            self.fail("Shouln't have this model in the start ORM")
         except KeyError:
             pass
 
@@ -26,5 +25,4 @@ class TestMigration0003(MigrationTestCase):
 
         Guess = self.dest_orm['riddles.Guess']
 
-        # Assertions
         self.assertEqual(Guess.objects.all().count(), 0)
