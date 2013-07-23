@@ -24,3 +24,13 @@ class Riddle(models.Model):
 
     def __unicode__(self):
         return self.content
+
+
+class Guess(models.Model):
+    """
+    A Guess in a riddle.
+    If the guess's answer is equal to the Riddle answer than it's correct.
+    """
+    answer = models.CharField(_("Guess"),max_length=250)
+
+
