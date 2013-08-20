@@ -15,4 +15,16 @@ package { [
   ensure  => 'installed',
 }
 
-include postgresql::server
+# include postgresql::server
+
+class { 'postgresql::server':
+  config_hash => {
+    'ip_mask_deny_postgres_user' => '0.0.0.0/32',
+    'ip_mask_allow_all_users'    => '0.0.0.0/0',
+    'listen_addresses'           => '*',
+    'ipv4acls'                   => ['host all all 0.0.0.0/0 md5'],
+    'manage_redhat_firewall'     => true,
+    'manage_pg_hba_conf'         => true,
+    'postgres_password'          => 'postgres',
+  },
+}
