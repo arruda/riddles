@@ -15,8 +15,6 @@ package { [
   ensure  => 'installed',
 }
 
-# include postgresql::server
-
 class { 'postgresql::server':
   config_hash => {
     'ip_mask_deny_postgres_user' => '0.0.0.0/32',
@@ -27,4 +25,9 @@ class { 'postgresql::server':
     'manage_pg_hba_conf'         => true,
     'postgres_password'          => 'postgres',
   },
+}
+
+postgresql::db { 'riddles':
+  user     => 'riddles_db_u',
+  password => 'riddles_db_u'
 }
