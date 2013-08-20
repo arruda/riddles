@@ -38,7 +38,7 @@ class { 'python':
   version    => 'system',
   dev        => true,
   virtualenv => true,
-  gunicorn   => true,
+  gunicorn   => false,
 }
 
 python::virtualenv { '/home/vagrant/.venvs/riddles':
