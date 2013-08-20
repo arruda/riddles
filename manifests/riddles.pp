@@ -10,7 +10,8 @@ package { [
     'build-essential',
     'vim',
     'curl',
-    'git-core'
+    'git-core',
+    'libpq-dev'
   ]:
   ensure  => 'installed',
 }
@@ -30,4 +31,23 @@ class { 'postgresql::server':
 postgresql::db { 'riddles':
   user     => 'riddles_db_u',
   password => 'riddles_db_u'
+}
+
+
+class { 'python':
+  version    => 'system',
+  dev        => true,
+  virtualenv => true,
+  gunicorn   => true,
+}
+
+python::virtualenv { '/home/vagrant/.venvs/riddles':
+  ensure       => present,
+  version      => 'system',
+  requirements => '/vagrant/requirements.txt',
+  # proxy        => 'http://proxy.domain.com:3128',
+  systempkgs   => true,
+  distribute   => false,
+  owner        => 'vagrant',
+  group        => 'vagrant',
 }
