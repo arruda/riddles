@@ -28,9 +28,9 @@ class { 'postgresql::server':
   },
 }
 
-postgresql::db { 'riddles':
-  user     => 'riddles_db_u',
-  password => 'riddles_db_u'
+postgresql::db { 'riddlesdb':
+  user     => 'riddles_u',
+  password => 'riddles_u'
 }
 
 
@@ -62,9 +62,16 @@ python::virtualenv { '/home/vagrant/.venvs/riddles':
 }
 
 class run_django {
-    exec { 'run_django':
+    exec { 'run_django_bg':
         command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py runserver 0.0.0.0:8000&',
+    }
+    exec { 'syncdb':
+        command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py syncdb --noinput',
+    }
+    exec { 'south_migrate':
+        command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py migrate',
     }
 }
 class { 'run_django':
 }
+
