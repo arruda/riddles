@@ -36,10 +36,19 @@ postgresql::db { 'riddles':
 
 class { 'python':
   version    => 'system',
+  pip        => true,
   dev        => true,
   virtualenv => true,
   gunicorn   => false,
 }
+
+python::pip { 'virtualenvwrapper':
+  ensure      => 'absent',
+  # virtualenv  => '/var/www/project1',
+  owner       => 'root',
+  # environment => 'ORACLE_HOME=/usr/lib/oracle/11.2/client64',
+}
+
 
 python::virtualenv { '/home/vagrant/.venvs/riddles':
   ensure       => present,
@@ -50,4 +59,12 @@ python::virtualenv { '/home/vagrant/.venvs/riddles':
   distribute   => false,
   owner        => 'vagrant',
   group        => 'vagrant',
+}
+
+class run_django {
+    exec { 'run_django':
+        command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py runserver 0.0.0.0:8000&',
+    }
+}
+class { 'run_django':
 }
