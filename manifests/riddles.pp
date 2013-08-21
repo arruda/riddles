@@ -26,13 +26,12 @@ class { 'postgresql::server':
     'manage_pg_hba_conf'         => true,
     'postgres_password'          => 'postgres',
   },
-}
+} ->
 
 postgresql::db { 'riddlesdb':
   user     => 'riddles_u',
   password => 'riddles_u'
-}
-
+} ->
 
 class { 'python':
   version    => 'system',
@@ -40,14 +39,14 @@ class { 'python':
   dev        => true,
   virtualenv => true,
   gunicorn   => false,
-}
+} ->
 
-python::pip { 'virtualenvwrapper':
-  ensure      => 'absent',
-  # virtualenv  => '/var/www/project1',
-  owner       => 'root',
-  # environment => 'ORACLE_HOME=/usr/lib/oracle/11.2/client64',
-}
+# python::pip { 'virtualenvwrapper':
+#   ensure      => 'absent',
+#   # virtualenv  => '/var/www/project1',
+#   owner       => 'root',
+#   # environment => 'ORACLE_HOME=/usr/lib/oracle/11.2/client64',
+# }
 
 
 python::virtualenv { '/home/vagrant/.venvs/riddles':
@@ -59,19 +58,29 @@ python::virtualenv { '/home/vagrant/.venvs/riddles':
   distribute   => false,
   owner        => 'vagrant',
   group        => 'vagrant',
+} ->
+
+class { 'run_django':
+    # require => Class['postgresql'],
 }
 
 class run_django {
     exec { 'run_django_bg':
         command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py runserver 0.0.0.0:8000&',
+        require => Exec["south_migrate"]
+    }
+    exec { 'south_migrate':
+        command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py migrate',
+        require => Exec["syncdb"]
     }
     exec { 'syncdb':
         command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py syncdb --noinput',
     }
-    exec { 'south_migrate':
-        command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py migrate',
-    }
-}
-class { 'run_django':
 }
 
+
+# class { 'ruby':
+#   version         => '1.8.7',
+#   gems_version    => '1.8.24',
+#   rubygems_update => false
+# }
