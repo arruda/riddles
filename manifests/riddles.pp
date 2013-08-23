@@ -56,10 +56,6 @@ python::virtualenv { '/home/vagrant/.venvs/riddles':
   group        => 'vagrant',
 } ->
 
-# django run stuff
-class { 'run_django':
-}
-
 
 # Preparing ruby
 class { 'ruby':
@@ -77,6 +73,10 @@ bundler::install { '/vagrant/':
   user       => 'root',
   group      => 'root',
 }
+->
 
+# django run stuff
+class { 'run_django':
+}
 
 
