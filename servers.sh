@@ -1,9 +1,13 @@
 #!/bin/bash
 COMANDO=$1
 
+if [ -z "$PY_PATH" ]; then
+    PY_PATH="python"
+fi
+
 start_django(){
     echo "iniciando django"
-    python manage.py runserver&
+    $PY_PATH manage.py runserver&
 }
 
 stop_django(){

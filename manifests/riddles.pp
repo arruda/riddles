@@ -1,5 +1,5 @@
 group { 'puppet': ensure => present }
-Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
+Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/', '/usr/local/bin/' ] }
 File { owner => 0, group => 0, mode => 0644 }
 
 class {'apt':
@@ -16,6 +16,8 @@ package { [
   ensure  => 'installed',
 }
 
+
+# PostgreSQL
 class { 'postgresql::server':
   config_hash => {
     'ip_mask_deny_postgres_user' => '0.0.0.0/32',
@@ -33,6 +35,8 @@ postgresql::db { 'riddlesdb':
   password => 'riddles_u'
 } ->
 
+
+# Python
 class { 'python':
   version    => 'system',
   pip        => true,
@@ -40,14 +44,6 @@ class { 'python':
   virtualenv => true,
   gunicorn   => false,
 } ->
-
-# python::pip { 'virtualenvwrapper':
-#   ensure      => 'absent',
-#   # virtualenv  => '/var/www/project1',
-#   owner       => 'root',
-#   # environment => 'ORACLE_HOME=/usr/lib/oracle/11.2/client64',
-# }
-
 
 python::virtualenv { '/home/vagrant/.venvs/riddles':
   ensure       => present,
@@ -60,13 +56,26 @@ python::virtualenv { '/home/vagrant/.venvs/riddles':
   group        => 'vagrant',
 } ->
 
+# django run stuff
 class { 'run_django':
 }
 
 
+# Preparing ruby
+class { 'ruby':
 
-# class { 'ruby':
-#   version         => '1.8.7',
-#   gems_version    => '1.8.24',
-#   rubygems_update => false
-# }
+  # version         => '1.9.3',
+  ruby_package     => 'ruby1.9.3',
+  # gems_version    => '1.8.25',
+  rubygems_update => false
+} ->
+class { bundler:
+    provider => 'gem',
+    ensure => 'present'
+}->
+bundler::install { '/vagrant/':
+  user       => 'root',
+  group      => 'root',
+}
+
+
