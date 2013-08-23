@@ -1,7 +1,9 @@
 class run_django {
     exec { 'run_django_bg':
-        environment => "PY_PATH='/home/vagrant/.venvs/riddles/bin/python'",
-        command => '/home/vagrant/.venvs/riddles/bin/python /vagrant/manage.py runserver 0.0.0.0:8000&',
+        environment => "PY_PATH=/home/vagrant/.venvs/riddles/bin/python",
+        cwd     =>'/vagrant/',
+        command => '/vagrant/servers.sh start_django',
+        logoutput => true,
         require => Exec["south_migrate"]
     }
     exec { 'south_migrate':

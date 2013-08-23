@@ -7,7 +7,7 @@ fi
 
 start_django(){
     echo "iniciando django"
-    $PY_PATH manage.py runserver&
+    $PY_PATH manage.py runserver 0.0.0.0:8000&
 }
 
 stop_django(){
