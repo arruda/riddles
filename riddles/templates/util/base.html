@@ -1,35 +1,52 @@
 {% extends "util/skeleton.html"%}
 
 {% block 'css-extras' %}
-	<link  rel='stylesheet' media='all'  type='text/css' href="{{ STATIC_URL }}css/style.css">
+	<link  rel='stylesheet' media='all'  type='text/css' href="{{ STATIC_URL }}css/riddles.css">
 {% endblock %}
 
 {% block 'js-imports' %}
+<script src="{{ STATIC_URL }}js/libs/jquery.anchor.js"></script>
 {% endblock %}
 
 {% block 'jquery-docready' %}
 {{ block.super }}
 {% endblock %}
 
-{% block 'body-header' %}
-		{% include "util/header.html" %} 
-	 
+
+{% block 'body-wrapper' %}
+    <div id="main-wrapper">
+        <header id="main-header">
+            {% block 'body-header' %}
+                    {% include "util/header.html" %}
+
+            {% endblock %}
+        </header>
+
+        <div id="main-container"  class="clearfix" role="main">
+
+            {% block 'body-side' %}
+            {% endblock %}
+
+            {% block 'body-main' %}
+            	 <div id='content' >
+            			{% block 'body-content' %}
+            			{% endblock %}
+            	 </div>
+            {% endblock %}
+        </div>
+
+        <footer id="about-container">
+            {% block 'body-footer' %}
+                 {% include "util/footer.html" %}
+            {% endblock %}
+        </footer>
+    </div>
 {% endblock %}
 
 
 
-{% block 'body-side' %}
-		{% include "util/float-lateral.html" %} 
-{% endblock %}
 
 
-{% block 'body-main' %}
-	 <div id='content' >
-			{% block 'body-content' %}
-			{% endblock %}
-	 </div>
-{% endblock %}
 
-{% block 'body-footer' %}
-     {% include "util/footer.html" %} 
-{% endblock %}
+
+
