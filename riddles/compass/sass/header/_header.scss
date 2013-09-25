@@ -1,0 +1,6 @@
+@import "compass/css3";
+
+#main-header {
+    @include box-shadow(#333333 2px 2px 10px);
+}
+
