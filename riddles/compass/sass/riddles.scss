@@ -1,5 +1,16 @@
 @import "base";
 
+@import "header/header";
+
 #main-wrapper {
   @include container;
+}
+#main-container{
+    padding-top: 80px;
+    section{
+        h1 {
+            margin-top: 80px;
+
+        }
+    }
 }

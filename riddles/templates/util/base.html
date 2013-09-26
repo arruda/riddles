@@ -14,14 +14,12 @@
 
 
 {% block 'body-wrapper' %}
+    <header id="main-header">
+        {% block 'body-header' %}
+                {% include "util/header.html" %}
+        {% endblock %}
+    </header>
     <div id="main-wrapper">
-        <header id="main-header">
-            {% block 'body-header' %}
-                    {% include "util/header.html" %}
-
-            {% endblock %}
-        </header>
-
         <div id="main-container"  class="clearfix" role="main">
             {% block 'body-side' %}
             {% endblock %}
